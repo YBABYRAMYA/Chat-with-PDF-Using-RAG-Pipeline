@@ -131,7 +131,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Your Name** 🖋️
 - **Email**: yalagandulababyramya@gmail.com 📧
-- **GitHub**: [your-username](https://github.com/YBABYRAMYA) 🐙
+- **GitHub**: [Github](https://github.com/YBABYRAMYA) 🐙
 
 ---
 
