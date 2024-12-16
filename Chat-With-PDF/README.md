@@ -56,43 +56,6 @@ This is required for generating embeddings:
 ```bash
 pip install sentence-transformers
 ```
-
----
-
-## ⚙️ Usage
-
-### Step 1: Scrape Website
-
-To scrape a website, use the `scrape_website(url)` function. Here’s an example:
-
-```python
-url = "https://example.com"
-scraped_data = scrape_website(url)
-print(scraped_data)
-```
-
-### Step 2: Process PDF
-
-To process a PDF file, use the following:
-
-```python
-import pdfplumber
-
-with pdfplumber.open("example.pdf") as pdf:
-    for page in pdf.pages:
-        print(page.extract_text())
-```
-
-### Step 3: Query the System
-
-Once the data is processed and stored in the vector store, you can query the system like so:
-
-```python
-query = "What is the capital of France?"
-response = query_system(query)
-print(response)
-```
-
 ---
 
 ## 🛠️ Technologies Used 🛠️
