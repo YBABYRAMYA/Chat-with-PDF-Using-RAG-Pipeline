@@ -1,5 +1,3 @@
----
-
 # 📚 **Chat-with-PDF** 🤖  
 ### *Extract, Split, and Query PDF Files with Ease*
 
