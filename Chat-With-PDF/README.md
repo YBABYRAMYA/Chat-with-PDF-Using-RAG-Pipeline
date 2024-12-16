@@ -1,5 +1,3 @@
-Here’s a detailed **updated README** and file structure based on the **code you shared** in the screenshot.
-
 ---
 
 # 📚 **Chat-with-PDF** 🤖  
