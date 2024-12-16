@@ -1,100 +1,153 @@
+Here’s a detailed **updated README** and file structure based on the **code you shared** in the screenshot.
+
 ---
 
-# 📚 Chat with PDF 🤖
+# 📚 **Chat-with-PDF** 🤖  
+### *Extract, Split, and Query PDF Files with Ease*
 
-A Python-based application to interact with PDF documents using a Retrieval-Augmented Generation (RAG) pipeline. It scrapes, processes, and generates context-rich responses based on user queries.
+---
 
-## 🚀 Features
+## 🛠️ **Overview** 🛠️
 
-- 📰 **Crawl & Scrape**: Scrapes content from URLs and stores the data.
-- 🔍 **Search**: Queries a vector store (FAISS) for relevant information.
-- 🧠 **Contextual Responses**: Uses LLMs (e.g., GPT) to generate answers from the scraped content.
-- 🌐 **Supports PDFs**: Extracts text and metadata from PDF files.
+This Python project extracts text from a PDF file, splits it into smaller chunks, stores them in a FAISS vector store, and enables querying to retrieve relevant information using LangChain and HuggingFace embeddings.
 
-## 💻 Installation 💻
+---
 
-### Prerequisites
+## 🚀 **Key Features** 🚀
 
-Make sure you have Python 3.7+ installed on your system. You can check your version using:
+- 📄 **PDF Text Extraction**: Seamlessly extract text from PDFs using `pdfplumber`.
+- 🔪 **Text Chunking**: Split the text into manageable chunks for processing.
+- 🧠 **Embeddings**: Generate embeddings using HuggingFace’s `all-MiniLM-L6-v2` model.
+- ⚡ **Vector Search**: Store and retrieve data quickly with **FAISS** for similarity search.
+- 🔍 **Query Functionality**: Ask questions about the PDF and get relevant information.
 
-```bash
-python --version
+---
+
+## 📝 **File Structure** 📝
+
+The project structure follows clean organization for readability and scalability:
+
+```
+Chat-with-PDF/
+│
+├── app.py              # Main Python script
+├── .env                # Environment file for configurations
+├── requirements.txt    # Project dependencies
+├── LICENSE             # Project license file
+├── README.md           # Project documentation
+└── data/               # Folder for storing PDF files
+    └── example.pdf     # Example PDF for demonstration
 ```
 
-### Step 1: Clone the Repository
+---
 
-```bash
-git clone https://github.com/your-username/Chat-with-PDF.git
-cd Chat-with-PDF
+## 💻 **Setup & Installation** 💻
+
+Follow the steps below to set up the project:
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your_username/Chat-with-PDF.git
+   cd Chat-with-PDF
+   ```
+
+2. **Install Dependencies**:
+   Make sure Python 3.8+ is installed. Install required packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+   **Dependencies**:
+   - `langchain`
+   - `langchain-community`
+   - `pdfplumber`
+   - `sentence-transformers`
+   - `faiss-cpu`
+
+3. **Add PDF File**:
+   Place your PDF files in the `data/` directory.
+
+---
+
+## ⚙️ **How It Works**
+
+### 1️⃣ **Extract Text from PDF**  1️⃣
+The `extract_text_from_pdf()` function uses `pdfplumber` to extract text page-by-page.
+
+```python
+def extract_text_from_pdf(pdf_path):
+    extracted_text = []
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            extracted_text.append(page.extract_text())
+    return "\n".join(extracted_text)
 ```
 
-### Step 2: Install Dependencies
+### 2️⃣ **Split Text into Chunks** 2️⃣
+The `CharacterTextSplitter` splits extracted text into smaller chunks for vector storage.
 
-You can install the required dependencies using pip:
-
-```bash
-pip install -r requirements.txt
+```python
+def split_text_into_chunks(text, chunk_size=500, overlap=50):
+    splitter = CharacterTextSplitter(separator="\n", chunk_size=chunk_size, chunk_overlap=overlap)
+    return splitter.split_text(text)
 ```
 
-### Step 3: Install FAISS (Optional)
+### 3️⃣ **Generate Embeddings & Store in FAISS** 3️⃣
+Text chunks are converted into embeddings using HuggingFace and stored in FAISS for efficient retrieval.
 
-If you're using FAISS for vector search, install the appropriate version:
+---
 
-- For CPU:
-  ```bash
-  pip install faiss-cpu
-  ```
-- For GPU (if you're using CUDA):
-  ```bash
-  pip install faiss-gpu
-  ```
+## 🖥️ **Run the Project** 🖥️
 
-### Step 4: Install `sentence-transformers`
+1. **Edit PDF Path**: Update the file path in `app.py`:
+   ```python
+   pdf_path = r"data/example.pdf"
+   ```
 
-This is required for generating embeddings:
+2. **Run the Script**:
+   ```bash
+   python app.py
+   ```
 
-```bash
-pip install sentence-transformers
+3. **Ask Questions**: Enter a query when prompted to retrieve relevant content from the PDF.
+
+---
+
+## 📊 **Example Output** 📊
+
+```plaintext
+Query: "What does the chart in the PDF represent?"
+Response:
+"18% Arts, entertainment, 59% recreation, accommodation, and food services."
 ```
----
-
-## 🛠️ Technologies Used 🛠️
-
-- **Python** 🐍
-- **FAISS** for vector storage 🔐
-- **Hugging Face** for embeddings 🤗
-- **BeautifulSoup** for web scraping 🌐
-- **pdfplumber** for PDF extraction 📄
-- **LangChain** for the pipeline ⚡
 
 ---
 
-## 🤖 How It Works
+## 🔧 **Dependencies** 🔧
 
-1. **Data Ingestion** 📥:
-   - Scrape website content or process PDF files.
-   - Segment and store content as embeddings in a vector store (FAISS).
+Ensure these libraries are installed:
 
-2. **Query Handling** 🧐:
-   - Convert the user's query into embeddings.
-   - Perform a similarity search in the vector store.
-   
-3. **Response Generation** 💬:
-   - Use a Language Model (e.g., GPT) to generate responses based on the retrieved data.
+- `langchain`
+- `pdfplumber`
+- `sentence-transformers`
+- `faiss-cpu`
 
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+You can install them all using:
+```bash
+pip install langchain langchain-community pdfplumber sentence-transformers faiss-cpu
+```
 
 ---
 
-## 📞 Contact
+## 🤝 **Contributing** 🤝
 
-- **Your Name** 🖋️
-- **Email**: yalagandulababyramya@gmail.com 📧
-- **GitHub**: [Github](https://github.com/YBABYRAMYA) 🐙
+Contributions are welcome! Open issues or pull requests for improvements.
 
 ---
 
+### **License**  
+📄 Licensed under the MIT License. 📄
+
+---
+
+✨ **Enjoy querying your PDFs with AI-powered tools!** 🚀
