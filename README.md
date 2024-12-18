@@ -3,7 +3,7 @@
 
 ---
 
-## 🛠️ **Overview** 🛠️
+## 🛠️ **Overview** 🛠️ 
 
 This Python project extracts text from a PDF file, splits it into smaller chunks, stores them in a FAISS vector store, and enables querying to retrieve relevant information using LangChain and HuggingFace embeddings.
 
